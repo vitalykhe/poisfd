@@ -1,0 +1,55 @@
+body {
+  
+  /* background-color: #542a0e; */
+  color: white;
+  font-family: 'Suez One', serif;
+}
+
+.cards{
+  display: inline-flex;
+}
+
+.table-area{
+  background-color: #0d9461;
+  /* height: 98vh; */
+  margin-top: 5px;
+  margin-bottom: 5px;
+  border-style: solid;
+  border-width: 5px;
+  border-color: #c1ba23;
+  border-radius: 50px;
+}
+
+.cardPlaceholder {
+  border: 2px;
+  border-color: #542a0e;
+  margin: 10px;
+  z-index: 1000;
+  border-style: dashed;
+  padding: 3px;
+}
+
+.card {
+  position: relative;
+  
+  width: 60px;
+  /* background-size: 80px 60px;
+  background-repeat: no-repeat; */
+  transition: 0.1s ease-in-out;
+}
+
+.card .on-table {
+  
+  width: 80px;
+  position: relative;
+  z-index: 1;
+  top: 0px;
+  margin-right: 1px;
+}
+
+.card:hover{
+  cursor: pointer;
+  z-index: 1;
+  -webkit-transform: translate(0px, -10px);
+  box-shadow: 0px 0px 5px 1px black;
+}

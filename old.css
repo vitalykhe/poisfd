@@ -1,0 +1,80 @@
+IMG {
+    width: inherit;
+    border: 1px solid  black;
+    border-radius: 5px;
+  
+  }
+  
+  .app {
+    
+    align-content: center;
+  }
+  
+  @keyframes test {
+    0%   {opacity: 0.5}
+    25%  {transform: translate(-20px)}
+    40%  {transform: translate(10px)}
+    50%  {transform: translate(-20px)}
+    75%  {}
+    100% {};
+  }
+  
+  .card {
+    position: relative;
+    display: inline-flex;
+    background: black;
+    border: 1px solid  #E65100;
+    padding: 0px;
+    border-radius: 7px;
+    
+    margin: 5px;
+    width:15%;
+    transition-duration: 200ms;
+    transition-timing-function: ease-in;
+    /* animation-name: test;
+    animation-duration: 2000ms;
+    animation-delay: 1500ms; */
+    
+  }
+  
+  
+   .card:hover {
+    transform: scale(1.1);
+    background-image: linear-gradient(#FFE0B2, white);
+    z-index: 1000;
+    
+  }
+  
+  .c0 {
+      /* transform: rotate(-20deg);
+      left: 50px;
+      z-index:100; */
+      
+  
+  }
+  .c1 {
+    /* transform: rotate(-10deg); */
+      /* left: 10px;
+         z-index:101; */
+  }
+  .c2 {
+    /* transform: rotate(0deg); */
+    /* top: -50px;
+    left: 250px;
+    z-index:102; */
+  }
+  .c3 {
+    /* transform: rotate(10deg); */
+      /* top: 25px;
+    left: 350px;
+      z-index:104; */
+  }
+  .c4 {
+    /* transform: rotate(20deg); */
+      /* top: 50px;
+    left: 450px;
+      z-index:105; */
+  }
+  
+  
+  
