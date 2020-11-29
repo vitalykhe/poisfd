@@ -306,11 +306,23 @@ const cardsCollection = [
 	cardImg: "assets/king_of_diamonds.png",
 },
 	{ 
-	cardId: 52,
-	cardRank: "14",
-	cardSuit: "diamonds",
-	cardImg: "assets/ace_of_diamonds.png",
-}
+		cardId: 52,
+		cardRank: "14",
+		cardSuit: "diamonds",
+		cardImg: "assets/ace_of_diamonds.png",
+	},
+	{ 
+		cardId: 53,
+		cardRank: null,
+		cardSuit: "cardsuit",
+		cardImg: "assets/card_backside.png",
+	},
+	{ 
+		cardId: 54,
+		cardRank: null,
+		cardSuit: "cardsuit",
+		cardImg: "assets/card_backside.png",
+	}
 ]
 
 // const cardsValues = ["2", "3", "4", "5", "6", "7", "8", "9", "10", "jack", "queen", "king", "ace"];
