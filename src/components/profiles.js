@@ -1,22 +1,22 @@
-const Players = {
+const profiles = {
     Foxie: {
         name: "Foxie",
-        image: "assets/profiles/foxie.jpg",
+        image: "assets/profiles/foxie.jpeg",
         rank: "beginner",
     },
     Owl: {
         name: "Owl",
-        image: "assets/profiles/owl.jpg",
+        image: "assets/profiles/owl.jpeg",
         rank: "guru"
     },
     Wofie: {
         name: "Wolfie",
-        image: "assets/profiles/wolf.jpg",
+        image: "assets/profiles/wolf.jpeg",
         rank: "vodoo"
     },
     Clumsy: {
         name: "Clumsy",
-        image: "assets/profiles/clumsy.jpg",
+        image: "assets/profiles/clumsy.jpeg",
         rank: "noob"
     },
     Susan: {
@@ -26,9 +26,9 @@ const Players = {
     },
     Guest: {
         name: "Guest",
-        image: "assets/profiles/guest.jpg",
+        image: "assets/profiles/guest.jpeg",
         rank: "lopooooh!!"
     }
 }
 
-export default Players
+export default profiles

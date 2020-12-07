@@ -4,7 +4,7 @@ import cardsCollection from './cardsCollection'
 
 //получаем состояние активного игрока откуда нибудь(бэкенд)
 
-function Player(props) {
+function PovPlayer(props) {
 
     const activeHandInitialState = {
         inGame: props.inGame,
@@ -51,9 +51,9 @@ function Player(props) {
 
                 <div className="row">
                     <div className="col">
-                        <span class="badge badge-primary">Primary</span>
-                        <span class="badge badge-secondary">Secondary</span>
-                        <span class="badge badge-success">Success</span>
+                        <span className="badge badge-primary">Primary</span>
+                        <span className="badge badge-secondary">Secondary</span>
+                        <span className="badge badge-success">Success</span>
                         <input type="range" list="tickmarks" step="20"/>
                             <datalist id="tickmarks">
                                 <option value="100" label="100"/>
@@ -68,4 +68,4 @@ function Player(props) {
 
 }
 
-export default Player
+export default PovPlayer

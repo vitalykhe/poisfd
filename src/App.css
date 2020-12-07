@@ -8,10 +8,13 @@ body {
 .cardsArea {
   display: inline-flex;
   width:60%;
-  background-color: #542a0e;
+  /* background-color: #542a0e; */
 }
 
 .playerplace {
+  border-style: dotted;
+  border-radius: 10px;
+  border-width: 1px;
   flex-basis: 0;
   -ms-flex-positive: 1;
   flex-grow: 1;
@@ -20,18 +23,19 @@ body {
   height: 30.5vh;
   margin: 4px;
   padding:4px;
-  background-color: grey;
+  /* background-color: grey; */
 }
 
 .container-fluid {
   height: 98vh;
-  min-width: 665px;
+  min-width: 962px;
+  min-height: 466px;
 
 }
 
 .dealer {
-  width:25%;
-  background-color: #542a0e;
+  width:20%;
+  /* background-color: #542a0e; */
 }
 
 .table-area{
@@ -46,43 +50,101 @@ body {
 
 .cardPlaceholder {
   border: 2px;
-  border-color: #542a0e;
+  /* border-color: #542a0e; */
   width: 70px;
   z-index: 1000;
   border-style: dashed;
   padding: 3px;
 }
 
+.wrap {
+  width: 400px;
+  height: 400px;
+  background-color: rgb(118, 101, 130);
+  border-style: solid;
+  border-color: black;
+  box-sizing: border-box;
+  display: inline-block;
+}
+
 .card {
   position: relative;
   display: inline-block;
   width: 30%;
-  /* background-size: 80px 60px;
-  background-repeat: no-repeat; */
-  transition: 0.1s ease-in-out;
+  min-width: 60px;
   padding: 0px;
   margin: 4px;
 }
 
-.otherPlayersImage {
-  width: 5vw;
+.dealer {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.closed {
+  transition-duration: 500ms;
+  width: 40%;
+  min-width: 60px;
+}
+
+
+.profile-image {
+  width: 100px;
+  height: 100px;
+  border-radius: 50px;
+  object-fit: cover;
+}
+.otherPlayerCards {
+  animation-duration: 2000ms;
+}
+
+.otherPlayerCard-0 {
+  width: 60px;
+  position: absolute;
+  z-index: 10;
+  margin: 5px;
+  transform: translateX(90px) translateY(-70px);
+}
+.otherPlayerCard-1 {
+  width: 60px;
+  position: absolute;
+  z-index: 11;
+  margin: 5px;
+  transform: translateX(110px) translateY(-50px);
+  
+}
+
+.otherPlayerCard-0.entered{
+  transition-duration: 1500ms;
+  transform:  translateX(90px) translateY(-70px) rotate(360deg);
+}
+
+.otherPlayerCard-1.entered {
+  transform:  translateX(110px) translateY(-50px) rotate(360deg);
+  transition-duration: 1500ms;
+
+}
+
+.entering {
+  transform: translateX(180px) translateY(-180px);
+  transition-duration: 500ms;
 }
 
 .card .on-table {
   
   width: 80px;
-  position: relative;
   z-index: 1;
   top: 0px;
   margin-right: 1px;
 }
 
-.card:hover{
+/* .card:hover{
   cursor: pointer;
   z-index: 1;
   -webkit-transform: translate(0px, -10px);
   box-shadow: 0px 0px 5px 1px black;
-}
+} */
 
 /* .rangeforrace {
 
@@ -105,7 +167,7 @@ input[type=range]:focus {
   outline: none;
 }
 input[type=range]::-webkit-slider-runnable-track {
-  background: #42802c;
+  background: #0d9461;
   border: 1.8px solid #000101;
   border-radius: 25px;
   width: 100%;

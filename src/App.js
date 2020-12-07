@@ -1,86 +1,108 @@
-//Poker table
 // Сущности BE/логика FE:
-// Крупье - основной движок, управляющий состоянием
-// Действия: управляет колодой(раздает на стол), знает и открывает карты игроков, 
-// определяет победителя, зачисляет выигрыш
-// Колода карт. Все карты и остаток карт после раздачи
+// основной движок(крупье) - в компоненте App, управляющий состоянием
+// управляет на BE всей игровой логикой и содержит состояние
+// Компоненты BE: Колода карт(Deck), Player, Game?? - пока не понятно
+//
 // Игрок - держит свои 2 карты производит действия:
 // сделать ставку(начало игры), поднять ставку, сбросить(пас)
 
 // Интерфейс FE:
-// Карты: элемент, отображающий карты игрока
-// Кнопки: сброс карт(пас), ставка 
-// Поле: другие игроки с картами, крупье с колодой
+//  Table(state) -> OtherPlayer(func) -> PlayerCards(func)
+//							-> PovPlayer(func или state?)
+// 									Кнопки: сброс карт(пас), ставка 
 
-import React, { useState } from 'react';
+
+import React from 'react';
 import './App.css';
-import Player from './components/Player'
+import PovPlayer from './components/PovPlayer'
 import { minStake, maxStake } from './components/stakes'
 import OtherPlayer from './components/OtherPlayer'
-import Players from './components/playersProfiles' //позже вместо импорта будем подгружать их с BE
+import profiles from './components/profiles' //позже вместо импорта будем подгружать их с BE
 
 const activeplayerplaces = ["playerplace-1","playerplace-3","playerplace-5", "playerplace-8"]
 
 function App() {
-	// const [playerplaceCardsIDs, updateplayerplace] = useState(playingHand);
+
+	const [deckCoordinates, updateDeckCoordinares] = React.useState({})
+
+	const deckRef = React.useRef(null)
+
+	React.useEffect(() => {
+			updateDeckCoordinares(deckRef.current.getBoundingClientRect())
+			console.log(deckRef)
+		},
+	 [] )
+
+	const [handoutCards, performHandoutCards] = React.useState(false)
+
+	const [otherPlayerCards, setOtherPlayerCards] = React.useState(
+		{
+			Owl: [13, 18],
+			Foxie: [1, 29],
+			Susan: [33,3]
+		}
+	)
   	return (
 		  <div className='container-fluid table-area'>
 				<div className="row">
 					<div className="playerplace" id="playerplace-1">
-			  			<OtherPlayer cards={[53,54]} name="Hiho" turn="check" playerProfile={Players.Owl}/>
+						
+						<OtherPlayer 
+							cards={otherPlayerCards.Foxie} 
+							name="Hiho" 
+							turn="check" 
+							profile={profiles.Owl} 
+							showCards={true} 
+							handoutCards={handoutCards} 
+							deckCoordinates={deckCoordinates} 
+						/>
 					</div>
 					<div className="playerplace" id="playerplace-2">
-
 					</div>
-					<div className="dealer" id="dealer">
-						<img className="card" src="assets/card_backside.png"/>
-						Banker
+					<div className="dealer">
+						<img ref={deckRef} id="dealer" className="card" src="assets/card_backside.png" alt="Deck"/>
+						<button onClick={() => {performHandoutCards(handoutCards => !handoutCards)}}>HandOut</button>
 					</div>
 					<div className="playerplace" id="playerplace-3">
-					playerplace3
 					</div>
 					<div className="playerplace" id="playerplace-4">
-					playerplace4
 					</div>
 				</div>
 				<div className="row">
 					<div className="playerplace" id="playerplace-5">
-					<OtherPlayer cards={[53,54]} playerProfile={Players.Susan} />
-					playerplace5
+						<OtherPlayer 
+							cards={otherPlayerCards.Susan} 
+							name="Hiho" 
+							turn="check" 
+							profile={profiles.Susan} 
+							showCards={true}  
+							handoutCards={handoutCards}
+						/>
 					</div>
 					<div className="cardsArea">
-					cardsArea
 					</div>
 					<div className="playerplace" id="playerplace-6">
-					playerplace6
 					</div>
 				</div>
 				<div className="row">
 					<div className="playerplace" id="playerplace-7">
-					playerplace7
 					</div>
 					<div className="playerplace" id="playerplace-8">
-					playerplace8
 					</div>
 					<div className="playerplace" id="playerplace-9">
-
-						<Player 
+						<PovPlayer 
 							inGame={true} 
 							fold={false} 
 							check={false} 
 							stake={minStake} 
 							showHand={false}
-							cards={[1,17]}
+							cards={[44,17]}
 						/>
 					</div>
-
 					<div className="playerplace" id="playerplace-10">
-						playerplace10
 					</div>
-
 				</div>
 			</div>
     );
 }
-
 export default App;

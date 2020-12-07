@@ -1,10 +1,13 @@
 import React from 'react'
 
 export default function Card(props){
+	
+	const className = props.className || "card"
+	const style = props.style
 
 	return (
 	
-		<div className="card" style={props.style}>
+		<div className={className} style={{...style}}>
 			<img
 				src={props.card.cardImg}
 				className="card-img-top"
