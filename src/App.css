@@ -103,32 +103,35 @@ body {
   width: 60px;
   position: absolute;
   z-index: 10;
-  margin: 5px;
-  transform: translateX(90px) translateY(-70px);
+  margin: 0px;
+  /* animation-duration: 2000ms; */
+  /* transform: translateX(90px) translateY(-70px); */
 }
 .otherPlayerCard-1 {
   width: 60px;
   position: absolute;
   z-index: 11;
-  margin: 5px;
-  transform: translateX(110px) translateY(-50px);
+  margin: 0px;
+  /* animation-duration: 2000ms; */
   
 }
 
-.otherPlayerCard-0.entered{
-  transition-duration: 1500ms;
+.otherPlayerCard-0.entered {
+  transition-duration: 500ms;
   transform:  translateX(90px) translateY(-70px) rotate(360deg);
 }
 
 .otherPlayerCard-1.entered {
-  transform:  translateX(110px) translateY(-50px) rotate(360deg);
-  transition-duration: 1500ms;
+  transition-duration: 500ms;
+  transform: translateX(110px) translateY(-50px) rotate(360deg);
 
 }
 
 .entering {
-  transform: translateX(180px) translateY(-180px);
-  transition-duration: 500ms;
+  /* transition-duration: 500ms; */
+  transform: translate(0) translateY(0) rotate(360deg);
+  top: 80px;
+  left:400px;
 }
 
 .card .on-table {

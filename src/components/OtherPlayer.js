@@ -11,14 +11,21 @@ function OtherPlayer(props) {
         const showCards = props.showCards
         const cards = props.cards
         const handoutCards = props.handoutCards
-        
-        return (
-            <div>
-                <Profile profile={profile}/>
-                <OtherPlayerCards cards={cards} showCards={showCards} handoutCards={handoutCards}/>
-                <PlayersTurnMessage turn="check" />
-            </div>
-        )
+        const deckCoordinates = props.deckCoordinates ? props.deckCoordinates : {top: `100px` , left: `100px`}
+        const inGame = props.inGame
+
+        if(inGame) {
+
+            return (
+                <div>
+                    <Profile profile={profile}/>
+                    <OtherPlayerCards cards={cards} showCards={showCards} handoutCards={handoutCards} deckCoordinates={deckCoordinates}/>
+                    <PlayersTurnMessage turn="check" />
+                </div>
+            )
+        } else {
+            return <div></div>
+        }
 }
 
 export default OtherPlayer

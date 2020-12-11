@@ -19,19 +19,49 @@ import { minStake, maxStake } from './components/stakes'
 import OtherPlayer from './components/OtherPlayer'
 import profiles from './components/profiles' //позже вместо импорта будем подгружать их с BE
 
-const activeplayerplaces = ["playerplace-1","playerplace-3","playerplace-5", "playerplace-8"]
-
 function App() {
 
-	const [deckCoordinates, updateDeckCoordinares] = React.useState({})
+	let [deckCoordinates, setDeckCoordinares] = React.useState({})
+	let [playersPlacesCoordinates, setPlayersPlacesCoordinares] = React.useState({})
 
-	const deckRef = React.useRef(null)
+	const deckRef = React.useRef()
+	const playerPlacesRefs = React.useRef({})
 
-	React.useEffect(() => {
-			updateDeckCoordinares(deckRef.current.getBoundingClientRect())
-			console.log(deckRef)
-		},
-	 [] )
+	const	addToRefsArr = (item) => {
+		if(item && item.id  && !playerPlacesRefs.current[item.id]) {
+			playerPlacesRefs.current[item.id] = item.getBoundingClientRect()
+			// console.log(playerPlacesRefs.current) 
+			// Консоль браузера почему-то ссылается на конечный объект 
+			// т.е выводит его полностью со всеми добавленными рефами
+			// однако, если в этом месте указать конкретный ключ(playerPlacesRefs.current[playerplace5]), к примеру
+			// то видно, что код работает ожидаемо
+		}
+			// console.log(playerPlacesRefs.current[item] + " cannot be added to refs array due to IF conditions")
+	}
+
+	// React.useEffect(() => {
+	// 		updateDeckCoordinares(deckRef.current.getBoundingClientRect())
+	// 	},
+	// 	[] 
+	// )
+	
+	React.useLayoutEffect(() => {
+		function updateRefItemsCoordinates() {
+			let temp = {}
+			Object.keys(playerPlacesRefs.current).map(el => {
+				setPlayersPlacesCoordinares(...{el: playerPlacesRefs.current[el]})
+			})
+	}
+
+		window.addEventListener('resize', updateRefItemsCoordinates)
+
+		updateRefItemsCoordinates()
+
+		return () => window.removeEventListener('resize', updateRefItemsCoordinates)
+
+	}, [])
+	
+	
 
 	const [handoutCards, performHandoutCards] = React.useState(false)
 
@@ -42,67 +72,69 @@ function App() {
 			Susan: [33,3]
 		}
 	)
-  	return (
-		  <div className='container-fluid table-area'>
-				<div className="row">
-					<div className="playerplace" id="playerplace-1">
-						
-						<OtherPlayer 
-							cards={otherPlayerCards.Foxie} 
-							name="Hiho" 
-							turn="check" 
-							profile={profiles.Owl} 
-							showCards={true} 
-							handoutCards={handoutCards} 
-							deckCoordinates={deckCoordinates} 
-						/>
-					</div>
-					<div className="playerplace" id="playerplace-2">
-					</div>
-					<div className="dealer">
-						<img ref={deckRef} id="dealer" className="card" src="assets/card_backside.png" alt="Deck"/>
-						<button onClick={() => {performHandoutCards(handoutCards => !handoutCards)}}>HandOut</button>
-					</div>
-					<div className="playerplace" id="playerplace-3">
-					</div>
-					<div className="playerplace" id="playerplace-4">
-					</div>
+	
+	return (
+		<div className='container-fluid table-area'>
+			<div className="row">
+				<div className="playerplace" id="playerplace1" ref={addToRefsArr}>
+					<OtherPlayer 
+						cards={otherPlayerCards.Foxie} 
+						name="Hiho" 
+						turn="check" 
+						profile={profiles.Owl} 
+						showCards={true} 
+						handoutCards={handoutCards} 
+						deckCoordinates={deckCoordinates}
+						inGame={false}
+					/>
 				</div>
-				<div className="row">
-					<div className="playerplace" id="playerplace-5">
-						<OtherPlayer 
-							cards={otherPlayerCards.Susan} 
-							name="Hiho" 
-							turn="check" 
-							profile={profiles.Susan} 
-							showCards={true}  
-							handoutCards={handoutCards}
-						/>
-					</div>
-					<div className="cardsArea">
-					</div>
-					<div className="playerplace" id="playerplace-6">
-					</div>
+				<div className="playerplace" id="playerplace2" ref={addToRefsArr}>
 				</div>
-				<div className="row">
-					<div className="playerplace" id="playerplace-7">
-					</div>
-					<div className="playerplace" id="playerplace-8">
-					</div>
-					<div className="playerplace" id="playerplace-9">
-						<PovPlayer 
-							inGame={true} 
-							fold={false} 
-							check={false} 
-							stake={minStake} 
-							showHand={false}
-							cards={[44,17]}
-						/>
-					</div>
-					<div className="playerplace" id="playerplace-10">
-					</div>
+				<div className="dealer">
+					<img ref={deckRef} id="dealer" className="card" src="assets/card_backside.png" alt="Deck"/>
+					<button onClick={() => {performHandoutCards(handoutCards => !handoutCards)}}>HandOut</button>
+				</div>
+				<div className="playerplace" id="playerplace3" ref={addToRefsArr}>
+				</div>
+				<div className="playerplace" id="playerplace4" ref={addToRefsArr}>
+				</div>
+			</div>	
+			<div className="row">
+				<div className="playerplace" id="playerplace5" ref={addToRefsArr} >
+					<OtherPlayer
+						cards={otherPlayerCards.Susan} 
+						name="Hiho" 
+						turn="check" 
+						profile={profiles.Susan} 
+						showCards={true}  
+						handoutCards={handoutCards}
+						deckCoordinates={deckCoordinates}
+					/>
+				</div>
+				<div className="cardsArea">
+				</div>
+				<div className="playerplace" id="playerplace6" ref={addToRefsArr}>
 				</div>
 			</div>
-    );
+			<div className="row">
+				<div className="playerplace" id="playerplace7" ref={addToRefsArr}>
+				</div>
+				<div className="playerplace" id="playerplace8" ref={addToRefsArr}>
+				</div>
+				<div className="playerplace" id="playerplace9" ref={addToRefsArr}>
+					<PovPlayer 
+						inGame={true} 
+						fold={false} 
+						check={false} 
+						stake={minStake} 
+						showHand={false}
+						cards={[44,17]}
+					/>
+				</div>
+				<div className="playerplace" id="playerplace0" ref={addToRefsArr}>
+				</div>
+			</div>
+		</div>
+	)
 }
 export default App;
