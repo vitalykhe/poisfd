@@ -11,103 +11,123 @@
 //							-> PovPlayer(func или state?)
 // 									Кнопки: сброс карт(пас), ставка 
 
-
 import React from 'react';
 import './App.css';
-import PovPlayer from './components/PovPlayer'
-import { minStake, maxStake } from './components/stakes'
+// import PovPlayer from './components/PovPlayer'
+// import { minStake, maxStake } from './components/stakes'
 import OtherPlayer from './components/OtherPlayer'
-import profiles from './components/profiles' //позже вместо импорта будем подгружать их с BE
+import getCards from './functions/getCards'
+
 
 function App() {
 
+	let [placesCoordinates, setPlacesCoordinares] = React.useState({})
+	const boardRefs = React.useRef({})
 
-	let [playersPlacesCoordinates, setPlayersPlacesCoordinares] = React.useState({})
+	let [boardState, setBoardState] = React.useState({
+		playerplace1 : {
+			player: {
+				id: 123,
+				name: "Foxie",
+        image: "assets/profiles/foxie.jpeg",
+				turn: null,
+				score: 200
+			},
+			isActive: true,
+			showCards: false
+		},
+		playerplace9 : {
+			player: {
+				id: 113,
+				name: "Wolfie",
+        image: "assets/profiles/wolfie.jpeg",
+				turn: null,
+				score: 200		
+			},
+			isActive: true,
+			showCards: true
+		},
+		playerplace3 : {
+			player: {
+				id: 133,
+				name: "Clumsy",
+        image: "assets/profiles/clumsy.jpeg",
+				turn: null,
+				score: 200		
+			},
+			isActive: true,
+			showCards: false
+		},
+		playerplace5 : {
+			player: {
+				id: 143,
+				name: "Susan",
+        image: "assets/profiles/susan.jpeg",
+				turn: null,
+				score: 200		
+			},
+			isActive: true,
+			showCards: false
+		},
+	})
 
-		const boardRefs = React.useRef({})
-
-	const	addToRefs = (item) => {
-		if(item && item.id  && !boardRefs.current[item.id]) {
-			boardRefs.current[item.id] = item.getBoundingClientRect()
-			// console.log(boardRefs.current) 
-			// Консоль браузера почему-то ссылается на конечный объект 
-			// т.е выводит его полностью со всеми добавленными рефами
-			// однако, если в этом месте указать конкретный ключ(boardRefs.current[playerplace5]), к примеру
-			// то видно, что код работает ожидаемо
+	const	addToRefs = (el) => {
+		if(el !== null && el.id ) {
+			boardRefs.current[el.id] = el
 		}
-			// console.log(boardRefs.current[item] + " cannot be added to refs array due to IF conditions")
+		// console.log(boardRefs.current)
 	}
 
-	// React.useEffect(() => {
-	// 		updateDeckCoordinares(deckRef.current.getBoundingClientRect())
-	// 	},
-	// 	[] 
-	// )
-	
 	React.useLayoutEffect(() => {
-		function updateRefItemsCoordinates() {
-			Object.keys(boardRefs.current).map(el => {
-				setPlayersPlacesCoordinares(playersPlacesCoordinates[el] = boardRefs.current[el])
+		const updateRefItemsCoordinates = () => {
+			let myObj = {}
+			Object.getOwnPropertyNames(boardRefs.current).forEach(el => {
+				myObj[el] = boardRefs.current[el].getBoundingClientRect()
 			})
-			console.log(playersPlacesCoordinates)
-	}
-
-		window.addEventListener('resize', updateRefItemsCoordinates)
-
-		updateRefItemsCoordinates()
-
-		return () => window.removeEventListener('resize', updateRefItemsCoordinates)
-
-	}, [])
-	
-	
-
-	const [handoutCards, performHandoutCards] = React.useState(false)
-
-	const [otherPlayerCards, setOtherPlayerCards] = React.useState(
-		{
-			Owl: [13, 18],
-			Foxie: [1, 29],
-			Susan: [33,3]
+			setPlacesCoordinares( myObj )
+			console.log(placesCoordinates)
 		}
-	)
-	
+		window.addEventListener('resize', updateRefItemsCoordinates)
+		updateRefItemsCoordinates()
+		return () => window.removeEventListener('resize', updateRefItemsCoordinates)
+	}, [])
+
+	const [handoutCards, setHandoutCards] = React.useState(false)
+
 	return (
 		<div className='container-fluid table-area'>
 			<div className="row">
 				<div className="playerplace" id="playerplace1" ref={addToRefs}>
 					<OtherPlayer 
-						cards={otherPlayerCards.Foxie} 
-						name="Hiho" 
-						turn="check" 
-						profile={profiles.Owl} 
-						showCards={true} 
-						handoutCards={handoutCards} 
-						deckCoordinates={boardRefs["deck"]}
-						inGame={false}
+						playerplace={boardState.playerplace1}
+						handoutCards={handoutCards}
+						deckCoordinates={placesCoordinates["deck"]}
+						placeCoordinates={placesCoordinates["playerplace1"]}
+						cards={getCards(boardState.playerplace1.showCards)}
+						showCards={boardState.playerplace1.showCards}
 					/>
 				</div>
 				<div className="playerplace" id="playerplace2" ref={addToRefs}>
+					{/* {JSON.stringify(placesCoordinates)} */}
 				</div>
-				<div className="dealer">
-					<img ref={addToRefs} id="deck" className="card" src="assets/card_backside.png" alt="Deck"/>
-					<button onClick={() => {performHandoutCards(handoutCards => !handoutCards)}}>HandOut</button>
+				<div className="dealer" id="deck" ref={addToRefs}>
+					<img className="dealer" src="assets/dealer.png" alt="dealer"/>
 				</div>
 				<div className="playerplace" id="playerplace3" ref={addToRefs}>
+					<button onClick={() => {setHandoutCards(handoutCards => !handoutCards)}}>HandOut</button>
 				</div>
 				<div className="playerplace" id="playerplace4" ref={addToRefs}>
 				</div>
 			</div>	
 			<div className="row">
 				<div className="playerplace" id="playerplace5" ref={addToRefs} >
-					<OtherPlayer
-						cards={otherPlayerCards.Susan} 
-						name="Hiho" 
-						turn="check" 
-						profile={profiles.Susan} 
-						showCards={true}  
+				<OtherPlayer 
+						playerplace={boardState.playerplace5}
+						deckCoordinates={placesCoordinates["deck"]}
+						placeCoordinates={placesCoordinates["playerplace5"]}
 						handoutCards={handoutCards}
-						deckCoordinates={boardRefs["deck"]}
+						cards={getCards(boardState.playerplace5.showCards)}
+						showCards={boardState.playerplace5.showCards}
 					/>
 				</div>
 				<div className="cardsArea">
@@ -117,17 +137,18 @@ function App() {
 			</div>
 			<div className="row">
 				<div className="playerplace" id="playerplace7" ref={addToRefs}>
+
 				</div>
 				<div className="playerplace" id="playerplace8" ref={addToRefs}>
 				</div>
 				<div className="playerplace" id="playerplace9" ref={addToRefs}>
-					<PovPlayer 
-						inGame={true} 
-						fold={false} 
-						check={false} 
-						stake={minStake} 
-						showHand={false}
-						cards={[44,17]}
+					<OtherPlayer 
+						playerplace={boardState.playerplace9}
+						deckCoordinates={placesCoordinates["deck"]}
+						placeCoordinates={placesCoordinates["playerplace9"]}
+						handoutCards={handoutCards}
+						cards={getCards(boardState.playerplace9.showCards)}
+						showCards={boardState.playerplace9.showCards}
 					/>
 				</div>
 				<div className="playerplace" id="playerplace0" ref={addToRefs}>

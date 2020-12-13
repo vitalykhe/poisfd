@@ -3,13 +3,11 @@ import {Transition} from 'react-transition-group'
 import Card from './components/card'
 import cardsCollection from './components/cardsCollection'
 
-
-
 function Test(){
 
     const x = 200
     const y = -200
-    
+
     const transitionStyles = {
         entering: { opacity: 1, },
         entered:  { opacity: 1, transform: `translateX(0) translateY(0)`},
@@ -32,31 +30,13 @@ function Test(){
                         }
                     </Transition>
                 </div>
-                
                 <div className="wrap">
                 </div>
         </div>
     )
 }
 
-
-
-
-
-
-
-
 export default Test
-
-
-
-
-
-
-
-
-
-
 
 // export default function HooksTest() {
 

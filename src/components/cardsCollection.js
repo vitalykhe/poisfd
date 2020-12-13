@@ -1,5 +1,5 @@
 const cardsCollection = [
-	{
+{
 	cardId: 1,
 	cardRank: "2",
 	cardSuit: "spades",

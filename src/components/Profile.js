@@ -1,6 +1,6 @@
 const Profile = (props) => {
     
-    const { name, image, rank } = props.profile
+    const { name, image } = props.player
     return ( 
         <div className="row">
                     <div className="col">

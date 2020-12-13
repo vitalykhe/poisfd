@@ -1,5 +1,6 @@
 import React, {useState, useEffect} from 'react'
 import Card from './card.js'
+import PlayerCards from './PlayerCards'
 import cardsCollection from './cardsCollection'
 
 //получаем состояние активного игрока откуда нибудь(бэкенд)

@@ -6,20 +6,26 @@ import PlayersTurnMessage from './PlayersTurnMessage'
 //используется в интерфейсе игрока для обозначения других игроков, их карт и действий с ними 
 
 function OtherPlayer(props) {
-
-        const profile = props.profile
-        const showCards = props.showCards
-        const cards = props.cards
+        const {player, isActive, showCards} = props.playerplace
         const handoutCards = props.handoutCards
-        const deckCoordinates = props.deckCoordinates ? props.deckCoordinates : {top: `100px` , left: `100px`}
-        const inGame = props.inGame
+        const cards = props.cards
+        const deckCoordinates = props.deckCoordinates || {}
+        const placeCoordinates = props.placeCoordinates || {}
 
-        if(inGame) {
+        
+        
+        console.log(props)
 
+        if(isActive) {
             return (
                 <div>
-                    <Profile profile={profile}/>
-                    <PlayerCards cards={cards} showCards={showCards} handoutCards={handoutCards} deckCoordinates={deckCoordinates}/>
+                    <Profile player={player}/>
+                    <PlayerCards 
+                        cards={cards} 
+                        handoutCards={handoutCards} 
+                        deckCoordinates={deckCoordinates}
+                        placeCoordinates={placeCoordinates}
+                    />
                     <PlayersTurnMessage turn="check" />
                 </div>
             )
