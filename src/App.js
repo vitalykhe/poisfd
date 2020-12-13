@@ -85,7 +85,7 @@ function App() {
 				myObj[el] = boardRefs.current[el].getBoundingClientRect()
 			})
 			setPlacesCoordinares( myObj )
-			console.log(placesCoordinates)
+			// console.log(placesCoordinates)
 		}
 		window.addEventListener('resize', updateRefItemsCoordinates)
 		updateRefItemsCoordinates()
@@ -104,14 +104,13 @@ function App() {
 						deckCoordinates={placesCoordinates["deck"]}
 						placeCoordinates={placesCoordinates["playerplace1"]}
 						cards={getCards(boardState.playerplace1.showCards)}
-						showCards={boardState.playerplace1.showCards}
 					/>
 				</div>
 				<div className="playerplace" id="playerplace2" ref={addToRefs}>
 					{/* {JSON.stringify(placesCoordinates)} */}
 				</div>
 				<div className="dealer" id="deck" ref={addToRefs}>
-					<img className="dealer" src="assets/dealer.png" alt="dealer"/>
+					<img className="dealer-img" src="assets/dealer.png" alt="dealer"/>
 				</div>
 				<div className="playerplace" id="playerplace3" ref={addToRefs}>
 					<button onClick={() => {setHandoutCards(handoutCards => !handoutCards)}}>HandOut</button>

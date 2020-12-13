@@ -34,9 +34,12 @@ body {
 }
 
 .dealer {
-  width: 40%;
+  width: 20%;
   /* background-color: #542a0e; */
-  
+}
+
+.dealer-img {
+  width: 100%
 }
 
 .table-area{
@@ -115,6 +118,10 @@ body {
   margin: 0px;
   /* animation-duration: 2000ms; */
   
+}
+
+.cardOnBottom {
+  z-index: 2
 }
 
 .otherPlayerCard-0.entered {

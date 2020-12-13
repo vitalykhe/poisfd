@@ -14,10 +14,8 @@ export default function PlayerCards(props) {
         showCards,
     } = props
 
-    console.log(showCards)
-
-    let additionalStyles = {}
-    // if(playerplace["showCards"] === true) {  additionalStyles = { 'z-index' : '-1' } }
+    let cardsOnBottomStyles = {}
+    if(showCards === true) { cardsOnBottomStyles = {zIndex : 8} }
 
     let dx = deckCoordinates.x - placeCoordinates.x
     let dy = placeCoordinates.y - deckCoordinates.y
@@ -29,28 +27,26 @@ export default function PlayerCards(props) {
     
     const transitionStyles = {
         entering: { 
-            opacity: 1,
+            opacity: 0,
             transform: `translateX(${dx+offsetX}px) translateY(${-dy - offsetY}px) rotate(360deg)`,
             // top: `${deckCoordinates.top-42}px`, 
             // left: `${deckCoordinates.left+1}px`, 
-            'transitionDuration': '1000ms',
-            'transition-function' : 'ease-out',
+            transitionDuration: '300ms',
         },
         entered:  { 
             opacity: 1,
             // transform:  `rotate(360deg)`, 
-            // top: `${deckCoordinates.top-41}px`, 
-            // left: `${deckCoordinates.left}px`, 
-            'transitionDuration': '1000ms'
+            transitionFunction : 'ease-out',
+            transitionDuration: '900ms'
         },
         exiting:  { 
             opacity: 1,
-            'transitionDuration': '600ms',
+            transitionDuration: '600ms',
             transform: `translateX(${dx + offsetX}px) translateY(${-dy-offsetY}px) rotate(360deg)`,
         },
         exited:  { 
-            opacity: 1, 
-            'transitionDuration': '0ms',
+            opacity: 0, 
+            // transitionDuration: '0ms',
             // top: `${deckCoordinates.top-40}px`, left: `${deckCoordinates.left}px`, 
             // transform: `translateX(${placeCoordinates.x}px) translateY(${-placeCoordinates.y}px)`
         },
@@ -63,10 +59,10 @@ export default function PlayerCards(props) {
             .map((card,index) => 
             (
                 <Transition 
-                    timeout={5000} 
+                    timeout={1000} 
                     key={index} 
                     in={handoutCards} 
-                    mountOnEnter unmountOnExit
+                    // mountOnEnter unmountOnExit
                     >
                     {
                         state => 
@@ -74,8 +70,7 @@ export default function PlayerCards(props) {
                             <Card 
                                 card={card} 
                                 className={`otherPlayerCard-${index} ${state}`}
-                                style={{...transitionStyles[state], ...additionalStyles}}
-                            
+                                style={{...transitionStyles[state], ...cardsOnBottomStyles}}
                             />
                     }
                 </Transition>

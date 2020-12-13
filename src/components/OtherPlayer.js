@@ -11,11 +11,7 @@ function OtherPlayer(props) {
         const cards = props.cards
         const deckCoordinates = props.deckCoordinates || {}
         const placeCoordinates = props.placeCoordinates || {}
-
         
-        
-        console.log(props)
-
         if(isActive) {
             return (
                 <div>
@@ -25,6 +21,7 @@ function OtherPlayer(props) {
                         handoutCards={handoutCards} 
                         deckCoordinates={deckCoordinates}
                         placeCoordinates={placeCoordinates}
+                        showCards={showCards}
                     />
                     <PlayersTurnMessage turn="check" />
                 </div>
