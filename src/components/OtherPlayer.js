@@ -1,5 +1,5 @@
 import React from 'react'
-import OtherPlayerCards from './OtherPlayerCards'
+import PlayerCards from './PlayerCards'
 import Profile from './Profile'
 import PlayersTurnMessage from './PlayersTurnMessage'
 //функциональный компонент, получающий в свойства данные карт для отображения
@@ -19,7 +19,7 @@ function OtherPlayer(props) {
             return (
                 <div>
                     <Profile profile={profile}/>
-                    <OtherPlayerCards cards={cards} showCards={showCards} handoutCards={handoutCards} deckCoordinates={deckCoordinates}/>
+                    <PlayerCards cards={cards} showCards={showCards} handoutCards={handoutCards} deckCoordinates={deckCoordinates}/>
                     <PlayersTurnMessage turn="check" />
                 </div>
             )
