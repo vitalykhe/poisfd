@@ -9,28 +9,35 @@ export default function PlayerCards(props) {
     const {
         cards,
         handoutCards,
-        deckCoordinates,
-        placeCoordinates, 
+        sourceCoordinates,
+        targetCoordinates, 
         showCards,
     } = props
 
+    //transition parameters
+
+    let isCardOnBottomClass = ""
     let cardsOnBottomStyles = {}
-    if(showCards === true) { cardsOnBottomStyles = {zIndex : 8} }
+    if(showCards === true) { 
+        // cardsOnBottomStyles = {zIndex : 8}
+        isCardOnBottomClass = "cardOnBottom"
+    }
 
-    let dx = deckCoordinates.x - placeCoordinates.x
-    let dy = placeCoordinates.y - deckCoordinates.y
-    let offsetX = deckCoordinates.width/4
-    let offsetY = deckCoordinates.height/4
+    let dx = sourceCoordinates.x - targetCoordinates.x
+    let dy = targetCoordinates.y - sourceCoordinates.y
+    let offsetX = sourceCoordinates.width/4
+    let offsetY = sourceCoordinates.height/4
+    
 
-    // console.log("deck top: " + deckCoordinates);
-    // console.log("placeCoordinates left: " + placeCoordinates);
+    // console.log("deck top: " + sourceCoordinates);
+    // console.log("targetCoordinates left: " + targetCoordinates);
     
     const transitionStyles = {
         entering: { 
             opacity: 0,
             transform: `translateX(${dx+offsetX}px) translateY(${-dy - offsetY}px) rotate(360deg)`,
-            // top: `${deckCoordinates.top-42}px`, 
-            // left: `${deckCoordinates.left+1}px`, 
+            // top: `${sourceCoordinates.top-42}px`, 
+            // left: `${sourceCoordinates.left+1}px`, 
             transitionDuration: '300ms',
         },
         entered:  { 
@@ -47,8 +54,8 @@ export default function PlayerCards(props) {
         exited:  { 
             opacity: 0, 
             // transitionDuration: '0ms',
-            // top: `${deckCoordinates.top-40}px`, left: `${deckCoordinates.left}px`, 
-            // transform: `translateX(${placeCoordinates.x}px) translateY(${-placeCoordinates.y}px)`
+            // top: `${sourceCoordinates.top-40}px`, left: `${sourceCoordinates.left}px`, 
+            // transform: `translateX(${targetCoordinates.x}px) translateY(${-targetCoordinates.y}px)`
         },
       }
 
@@ -69,7 +76,7 @@ export default function PlayerCards(props) {
                             
                             <Card 
                                 card={card} 
-                                className={`otherPlayerCard-${index} ${state}`}
+                                className={`otherPlayerCard-${index} ${isCardOnBottomClass} ${state}`}
                                 style={{...transitionStyles[state], ...cardsOnBottomStyles}}
                             />
                     }

@@ -9,8 +9,8 @@ function OtherPlayer(props) {
         const {player, isActive, showCards} = props.playerplace
         const handoutCards = props.handoutCards
         const cards = props.cards
-        const deckCoordinates = props.deckCoordinates || {}
-        const placeCoordinates = props.placeCoordinates || {}
+        const sourceCoordinates = props.sourceCoordinates || {}
+        const targetCoordinates = props.targetCoordinates || {}
         
         if(isActive) {
             return (
@@ -19,8 +19,8 @@ function OtherPlayer(props) {
                     <PlayerCards 
                         cards={cards} 
                         handoutCards={handoutCards} 
-                        deckCoordinates={deckCoordinates}
-                        placeCoordinates={placeCoordinates}
+                        sourceCoordinates={sourceCoordinates}
+                        targetCoordinates={targetCoordinates}
                         showCards={showCards}
                     />
                     <PlayersTurnMessage turn="check" />

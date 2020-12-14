@@ -92,7 +92,7 @@ function App() {
 		return () => window.removeEventListener('resize', updateRefItemsCoordinates)
 	}, [])
 
-	const [handoutCards, setHandoutCards] = React.useState(false)
+	const [handoutCards, setHandoutCards] = React.useState(true)
 
 	return (
 		<div className='container-fluid table-area'>
@@ -101,8 +101,8 @@ function App() {
 					<OtherPlayer 
 						playerplace={boardState.playerplace1}
 						handoutCards={handoutCards}
-						deckCoordinates={placesCoordinates["deck"]}
-						placeCoordinates={placesCoordinates["playerplace1"]}
+						sourceCoordinates={placesCoordinates["deck"]}
+						targetCoordinates={placesCoordinates["playerplace1"]}
 						cards={getCards(boardState.playerplace1.showCards)}
 					/>
 				</div>
@@ -122,8 +122,8 @@ function App() {
 				<div className="playerplace" id="playerplace5" ref={addToRefs} >
 				<OtherPlayer 
 						playerplace={boardState.playerplace5}
-						deckCoordinates={placesCoordinates["deck"]}
-						placeCoordinates={placesCoordinates["playerplace5"]}
+						sourceCoordinates={placesCoordinates["deck"]}
+						targetCoordinates={placesCoordinates["playerplace5"]}
 						handoutCards={handoutCards}
 						cards={getCards(boardState.playerplace5.showCards)}
 						showCards={boardState.playerplace5.showCards}
@@ -143,8 +143,8 @@ function App() {
 				<div className="playerplace" id="playerplace9" ref={addToRefs}>
 					<OtherPlayer 
 						playerplace={boardState.playerplace9}
-						deckCoordinates={placesCoordinates["deck"]}
-						placeCoordinates={placesCoordinates["playerplace9"]}
+						sourceCoordinates={placesCoordinates["deck"]}
+						targetCoordinates={placesCoordinates["playerplace9"]}
 						handoutCards={handoutCards}
 						cards={getCards(boardState.playerplace9.showCards)}
 						showCards={boardState.playerplace9.showCards}
