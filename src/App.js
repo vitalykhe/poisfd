@@ -55,7 +55,7 @@ function App() {
 				turn: null,
 				score: 200		
 			},
-			isActive: true,
+			isActive: false,
 			showCards: false
 		},
 		playerplace5 : {
@@ -92,7 +92,7 @@ function App() {
 		return () => window.removeEventListener('resize', updateRefItemsCoordinates)
 	}, [])
 
-	const [handoutCards, setHandoutCards] = React.useState(true)
+	const [handoutCards, setHandoutCards] = React.useState(false)
 
 	return (
 		<div className='container-fluid table-area'>
@@ -113,6 +113,13 @@ function App() {
 					<img className="dealer-img" src="assets/dealer.png" alt="dealer"/>
 				</div>
 				<div className="playerplace" id="playerplace3" ref={addToRefs}>
+					<OtherPlayer 
+						playerplace={boardState.playerplace3}
+						handoutCards={handoutCards}
+						sourceCoordinates={placesCoordinates["deck"]}
+						targetCoordinates={placesCoordinates["playerplace3"]}
+						cards={getCards(boardState.playerplace3.showCards)}
+					/>
 					<button onClick={() => {setHandoutCards(handoutCards => !handoutCards)}}>HandOut</button>
 				</div>
 				<div className="playerplace" id="playerplace4" ref={addToRefs}>
@@ -126,7 +133,6 @@ function App() {
 						targetCoordinates={placesCoordinates["playerplace5"]}
 						handoutCards={handoutCards}
 						cards={getCards(boardState.playerplace5.showCards)}
-						showCards={boardState.playerplace5.showCards}
 					/>
 				</div>
 				<div className="cardsArea">
@@ -147,7 +153,6 @@ function App() {
 						targetCoordinates={placesCoordinates["playerplace9"]}
 						handoutCards={handoutCards}
 						cards={getCards(boardState.playerplace9.showCards)}
-						showCards={boardState.playerplace9.showCards}
 					/>
 				</div>
 				<div className="playerplace" id="playerplace0" ref={addToRefs}>

@@ -1,6 +1,6 @@
 import React, {useState} from 'react'
 
-function stake() {
+function Raise() {
     return (
         <div className="form-group">
             <input type="range"  list="tickmarks" step="20"/>
@@ -12,4 +12,4 @@ function stake() {
     )
 }
 
-export default stake
+export default Raise

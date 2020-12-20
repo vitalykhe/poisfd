@@ -3,8 +3,6 @@ import cardsCollection from './cardsCollection'
 import Card from './card.js'
 import {Transition} from 'react-transition-group'
 
-
-
 export default function PlayerCards(props) {
     const {
         cards,
@@ -19,7 +17,6 @@ export default function PlayerCards(props) {
     let isCardOnBottomClass = ""
     let cardsOnBottomStyles = {}
     if(showCards === true) { 
-        // cardsOnBottomStyles = {zIndex : 8}
         isCardOnBottomClass = "cardOnBottom"
     }
 
@@ -27,22 +24,15 @@ export default function PlayerCards(props) {
     let dy = targetCoordinates.y - sourceCoordinates.y
     let offsetX = sourceCoordinates.width/4
     let offsetY = sourceCoordinates.height/4
-    
-
-    // console.log("deck top: " + sourceCoordinates);
-    // console.log("targetCoordinates left: " + targetCoordinates);
-    
+ 
     const transitionStyles = {
         entering: { 
             opacity: 0,
             transform: `translateX(${dx+offsetX}px) translateY(${-dy - offsetY}px) rotate(360deg)`,
-            // top: `${sourceCoordinates.top-42}px`, 
-            // left: `${sourceCoordinates.left+1}px`, 
             transitionDuration: '300ms',
         },
         entered:  { 
             opacity: 1,
-            // transform:  `rotate(360deg)`, 
             transitionFunction : 'ease-out',
             transitionDuration: '900ms'
         },
@@ -53,16 +43,12 @@ export default function PlayerCards(props) {
         },
         exited:  { 
             opacity: 0, 
-            // transitionDuration: '0ms',
-            // top: `${sourceCoordinates.top-40}px`, left: `${sourceCoordinates.left}px`, 
-            // transform: `translateX(${targetCoordinates.x}px) translateY(${-targetCoordinates.y}px)`
         },
       }
 
     return (
-        // <TransitionGroup className="otherPlayerCards">
-        //  {
-            cardsCollection.filter( card => cards.indexOf(card.cardId) !== -1 )
+           cardsCollection
+            .filter( card => cards.indexOf(card.cardId) !== -1 )
             .map((card,index) => 
             (
                 <Transition 
@@ -73,7 +59,6 @@ export default function PlayerCards(props) {
                     >
                     {
                         state => 
-                            
                             <Card 
                                 card={card} 
                                 className={`otherPlayerCard-${index} ${isCardOnBottomClass} ${state}`}
@@ -83,8 +68,6 @@ export default function PlayerCards(props) {
                 </Transition>
             )
             )
-        //  }
-        // </TransitionGroup>
     )
 
 }
