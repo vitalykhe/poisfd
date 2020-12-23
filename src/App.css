@@ -91,7 +91,15 @@ body {
   width: 40%;
   min-width: 60px;
 }
-
+.cardOnBottom {
+  z-index: 8;
+}
+.otherPlayerCard-0.cardOnBottom.entered {
+  transform: translateX(90px) translateY(-80px);
+}
+.otherPlayerCard-0.cardOnBottom.entered {
+  transform: translateX(150px) translateY(-80px);
+}
 
 .profile-image {
   width: 100px;
@@ -125,11 +133,11 @@ body {
 }
 
 .otherPlayerCard-0.entered {
-  transform: translateX(50px) translateY(-40px);
+  transform: translateX(70px) translateY(-80px);
   
 }
 .otherPlayerCard-1.entered {
-  transform: translateX(80px) translateY(-60px);
+  transform: translateX(90px) translateY(-80px);
 }
 
 .card .on-table {

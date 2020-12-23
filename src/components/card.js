@@ -3,7 +3,7 @@ import React from 'react'
 export default function Card(props){
 	
 	const className = props.className || "card"
-	const style = props.style
+	const style = props.style || {}
 
 	return (
 	

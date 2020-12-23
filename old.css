@@ -26,11 +26,10 @@ IMG {
     border: 1px solid  #E65100;
     padding: 0px;
     border-radius: 7px;
-    
     margin: 5px;
     width:15%;
-    transition-duration: 200ms;
-    transition-timing-function: ease-in;
+    /* transition-duration: 200ms;
+    transition-timing-function: ease-in; */
     /* animation-name: test;
     animation-duration: 2000ms;
     animation-delay: 1500ms; */

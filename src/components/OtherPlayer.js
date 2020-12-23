@@ -6,11 +6,11 @@ import PlayersTurnMessage from './PlayersTurnMessage'
 //используется в интерфейсе игрока для обозначения других игроков, их карт и действий с ними 
 
 function OtherPlayer(props) {
-        const {player, isActive, showCards} = props.playerplace
+        const {player, isActive, showCards, score} = props.playerplace
         const handoutCards = props.handoutCards
         const cards = props.cards
-        const deckCoordinates = props.deckCoordinates || {}
-        const placeCoordinates = props.placeCoordinates || {}
+        const sourceCoordinates = props.sourceCoordinates || {}
+        const targetCoordinates = props.targetCoordinates || {}
         
         if(isActive) {
             return (
@@ -19,15 +19,18 @@ function OtherPlayer(props) {
                     <PlayerCards 
                         cards={cards} 
                         handoutCards={handoutCards} 
-                        deckCoordinates={deckCoordinates}
-                        placeCoordinates={placeCoordinates}
+                        sourceCoordinates={sourceCoordinates}
+                        targetCoordinates={targetCoordinates}
                         showCards={showCards}
                     />
                     <PlayersTurnMessage turn="check" />
                 </div>
             )
         } else {
-            return <div></div>
+            return <div>
+                <Profile player={player}/>
+                <PlayersTurnMessage turn="check" />
+            </div>
         }
 }
 
