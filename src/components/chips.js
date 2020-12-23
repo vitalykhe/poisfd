@@ -6,7 +6,7 @@ const Chips = (score, minStake, playerID) => {
   
   for (let i = 0; i < numberOfChips; i++) {
     <DivImageStyled 
-      key={`${playerID}-chip-${i}`}
+      key={`chip-${i}-${playerID}`}
       divClass="chipDiv"
       imageClass="chipImage"
       divStyle={}
