@@ -1,19 +1,19 @@
 import DivImageStyled from './divImageStyled'
 
-const Chips = (score, minStake, playerID) => {
+
+const Chips = (player, score, minStake) => {
   const numberOfChips = Math.floor(score/minStake)
-  let chips = {}
-  
+
   for (let i = 0; i < numberOfChips; i++) {
-    <DivImageStyled 
-      key={`chip-${i}-${playerID}`}
-      divClass="chipDiv"
-      imageClass="chipImage"
-      divStyle={}
-      imageSrc=""
-      />
+    const elements = <DivImageStyled 
+      key={`player-chip-${i}`}  
+      
+    />
   }
-  
+
+  return ( 
+    
+  )
 }
  
 export default Chips;
